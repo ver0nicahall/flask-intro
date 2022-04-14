@@ -32,7 +32,17 @@ def start_here():
 def say_hello():
     """Say hello and prompt for user's name."""
 
-    return """
+    awesomeness_options = ''.join([
+      f"<option value=\"{awesomeness}\">{awesomeness}</option>"
+      for awesomeness in AWESOMENESS
+    ])
+
+    insults_options = ''.join([
+      f"<option value=\"{insult}\">{insult}</option>"
+      for insult in INSULTS
+    ])
+
+    return f"""
     <!doctype html>
     <html>
       <head>
@@ -45,20 +55,7 @@ def say_hello():
           <input type="text" name="person">
           <select name="awesomeness">
             <option value=""></option>
-            <option value="awesome">awesome</option>
-            <option value="terrific">terrific</option>
-            <option value="fantastic">fantastic</option>
-            <option value="neato">neato</option>
-            <option value="fantabulous">fantabulous</option>
-            <option value="wowza">wowza</option>
-            <option value="oh-so-not-meh">oh-so-not-meh</option>
-            <option value="brilliant">brilliant</option>
-            <option value="ducky">ducky</option>
-            <option value="coolio">coolio</option>
-            <option value="incredible">incredible</option>
-            <option value="wondeful">wonderful</option>
-            <option value="smashing">smashing</option>
-            <option value="lovely">lovely</option>
+            {awesomeness_options} 
           </select>
           <input type="submit" value="Submit">
           <br/>
@@ -68,10 +65,7 @@ def say_hello():
           <input type="text" name="person">
           <select name="insult">
             <option value=""></option>
-            <option value="silly">silly</option>
-            <option value="lazy">lazy</option>
-            <option value="annoying">annoying</option>
-            <option value="stupid">stupid</option>
+            {insults_options}            
           </select>
           <input type="submit" value="Submit">
           <br/>
@@ -79,6 +73,27 @@ def say_hello():
       </body>
     </html>
     """
+
+    # <option value="silly">silly</option>
+    #         <option value="lazy">lazy</option>
+    #         <option value="annoying">annoying</option>
+    #         <option value="stupid">stupid</option>
+
+
+      # <option value="awesome">awesome</option>
+      # <option value="terrific">terrific</option>
+      # <option value="fantastic">fantastic</option>
+      # <option value="neato">neato</option>
+      # <option value="fantabulous">fantabulous</option>
+      # <option value="wowza">wowza</option>
+      # <option value="oh-so-not-meh">oh-so-not-meh</option>
+      # <option value="brilliant">brilliant</option>
+      # <option value="ducky">ducky</option>
+      # <option value="coolio">coolio</option>
+      # <option value="incredible">incredible</option>
+      # <option value="wondeful">wonderful</option>
+      # <option value="smashing">smashing</option>
+      # <option value="lovely">lovely</option>
 
 
 @app.route('/greet')
@@ -97,7 +112,8 @@ def greet_person():
         <title>A Compliment</title>
       </head>
       <body>
-        Hi, {player}! I think you're {compliment}!
+        <h1>Hi, {player}! I think you're {compliment}!</h1>
+        <a href="/hello">Go back</a>
       </body>
     </html>
     """
@@ -117,7 +133,8 @@ def diss():
         <title>An Insult</title>
       </head>
       <body>
-        Hi, {player}! I think you're {insult}!
+        <h1>Hi, {player}! I think you're {insult}!</h1>
+        <a href="/hello">Go back</a>
       </body>
     </html>
     """
